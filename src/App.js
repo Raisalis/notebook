@@ -1,25 +1,40 @@
-import logo from './logo.svg';
+// src/App.js
+import React, { useState } from 'react';
 import './App.css';
+import NoteList from './Components/NoteList.js';
 
 function App() {
+  const [notes, setNotes] = useState([]);
+  const [newNote, setNewNote] = useState('');
+
+  const handleAddNote = () => {
+    if (newNote.trim() !== '') {
+      setNotes([...notes, newNote]);
+      setNewNote('');
+    }
+  };
+
+  const handleDeleteNote = (noteToDelete) => {
+    const updatedNotes = notes.filter((note) => note !== noteToDelete);
+    setNotes(updatedNotes);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>My Notebook</h1>
+      <div className="input-container">
+        <input
+          type="text"
+          placeholder="Add a note..."
+          value={newNote}
+          onChange={(e) => setNewNote(e.target.value)}
+        />
+        <button onClick={handleAddNote}>Add</button>
+      </div>
+      <NoteList notes={notes} onDelete={handleDeleteNote} />
     </div>
   );
 }
 
 export default App;
+
