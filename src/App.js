@@ -1,7 +1,13 @@
 // src/App.js
 import React, { useState } from 'react';
-import './App.css';
 import NoteList from './Components/NoteList.js';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import InputGroup from 'react-bootstrap/InputGroup';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const [notes, setNotes] = useState([]);
@@ -20,19 +26,25 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <h1>My Notebook</h1>
-      <div className="input-container">
-        <input
-          type="text"
-          placeholder="Add a note..."
-          value={newNote}
-          onChange={(e) => setNewNote(e.target.value)}
-        />
-        <button onClick={handleAddNote}>Add</button>
-      </div>
+    <Container className="App text-center">
+      <Row>
+        <Col className="d-flex justify-content-center">
+          <h1>My Notebook</h1>
+        </Col>
+      </Row>
+      <Row>
+        <Col className="d-flex justify-content-center">
+          <Form className="center">
+            <InputGroup className="mb-3" size="lg">
+              <Form.Control type="text" placeholder="Add a note..." value={newNote} onChange={(e) => setNewNote(e.target.value)} />
+              <Button variant="primary" onClick={handleAddNote}>Add</Button>
+            </InputGroup>
+          </Form>
+          
+        </Col>
+      </Row>
       <NoteList notes={notes} onDelete={handleDeleteNote} />
-    </div>
+    </Container>
   );
 }
 

@@ -1,12 +1,18 @@
 // src/components/Note.js
 import React from 'react';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 
 const Note = ({ note, onDelete }) => {
   return (
-    <div className="note">
-      <p>{note}</p>
-      <button onClick={() => onDelete(note)}>Delete</button>
-    </div>
+    <Card className="note" style={{width:'18rem'}}>
+        <Card.Body>
+            <Card.Text>
+                {note}
+            </Card.Text>
+            <Button variant="danger" onClick={() => onDelete(note)}>Delete</Button>
+        </Card.Body>
+    </Card>
   );
 };
 
